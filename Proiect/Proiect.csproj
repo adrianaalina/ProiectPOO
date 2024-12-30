@@ -6,6 +6,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+
+        <ItemGroup>
+            <Compile Include="Models\Utilizator.cs" />
+            <Compile Include="Models\Student.cs" />
+        </ItemGroup>
+
     </PropertyGroup>
 
 </Project>
