@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace;
+﻿namespace GestionareTeme.Models;
 
 public class Utilizator
 {
@@ -17,6 +17,6 @@ public class Utilizator
 
     public virtual void AfisareDetalii()
     {
-        Console.Writeline($"ID:{Id},Nume:{Nume},Username:{Username}");
+        Console.WriteLine($"ID:{Id},Nume:{Nume},Username:{Username}");
     }
 }
