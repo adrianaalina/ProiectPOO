@@ -1,4 +1,4 @@
-﻿namespace ProiectPOO;
+﻿namespace ProiectPOO.Aplicatie;
 using ProiectPOO.Models;
 using ProiectPOO.Utilities;
 
