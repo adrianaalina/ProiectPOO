@@ -1,4 +1,4 @@
-﻿namespace WpfApp1.GestionareTeme.Models
+﻿namespace ProiectPOO.Models
 {
 
     public class Intrebare

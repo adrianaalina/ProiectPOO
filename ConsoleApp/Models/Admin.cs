@@ -1,5 +1,5 @@
 ﻿
-namespace GestionareTeme.Models
+namespace ProiectPOO.Models
 {
 
     public class Admin : Utilizator

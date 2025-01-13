@@ -1,6 +1,6 @@
 ﻿using GestionareTeme.Models;
 
-namespace WpfApp1.GestionareTeme.Models;
+namespace ProiectPOO.Models;
 
 public class Student: Utilizator
 {

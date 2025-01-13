@@ -1,4 +1,4 @@
-﻿namespace GestionareTeme.Models;
+﻿namespace ProiectPOO.Models;
 
 public class Utilizator
 {

@@ -16,4 +16,16 @@
       <Content Include="Data\.idea\workspace.xml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="GestionareTeme\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="GestionareTeme\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="GestionareTeme\**" />
+    </ItemGroup>
+
 </Project>
