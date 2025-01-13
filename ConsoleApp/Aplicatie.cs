@@ -2,7 +2,6 @@
 using ProiectPOO.Models;
 using ProiectPOO.Utilities;
 
-{
 
 public class Aplicatie
 {
@@ -70,3 +69,4 @@ public class Aplicatie
         }
     }
 }
+
