@@ -16,12 +16,6 @@
 
         public bool VerificareRaspuns(int indiceRaspuns)
         {
-            return indiceRaspuns == IndiceRaspunsCorect;
-            
-        }
-
-        public bool VerificareRaspuns(int indiceRaspuns)
-        {
             return indiceRaspuns==IndiceRaspunsCorect;
         }
 

@@ -7,4 +7,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Content Include="Data\.idea\.gitignore" />
+      <Content Include="Data\.idea\encodings.xml" />
+      <Content Include="Data\.idea\indexLayout.xml" />
+      <Content Include="Data\.idea\projectSettingsUpdater.xml" />
+      <Content Include="Data\.idea\vcs.xml" />
+      <Content Include="Data\.idea\workspace.xml" />
+    </ItemGroup>
+
 </Project>

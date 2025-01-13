@@ -1,0 +1,16 @@
+﻿[
+  {
+    "Id": 1,
+    "Nume": "Ion Popescu",
+    "Username": "ion",
+    "Parola": "parola",
+    "$type": "GestionareTeme.Models.Student"
+  },
+  {
+    "Id": 2,
+    "Nume": "Maria Ionescu",
+    "Username": "maria",
+    "Parola": "parola",
+    "$type": "GestionareTeme.Models.Profesor"
+  }
+]

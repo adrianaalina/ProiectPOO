@@ -1,0 +1,11 @@
+﻿[
+  {
+    "Id": 1,
+    "Nume": "Tema 1",
+    "Cerinta": "Rezolva problema X",
+    "DataActivare": "2024-01-01T00:00:00",
+    "Deadline": "2024-01-10T23:59:59",
+    "EsteObligatorie": true,
+    "PermitePredareIntarziata": false
+  }
+]
