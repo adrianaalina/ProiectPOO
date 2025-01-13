@@ -1,6 +1,6 @@
 ﻿namespace ProiectPOO;
 using ProiectPOO.Models;
-
+using ProiectPOO.Utilities;
 
 {
 
@@ -23,9 +23,9 @@ public class Aplicatie
     {
         try
         {
-            utilizatori = FileHelper.IncarcaDate<Utilizator>("Data/Files/utilizatori.json");
-            teme = FileHelper.IncarcaDate<Tema>("Data/Files/teme.json");
-            rezolvari = FileHelper.IncarcaDate<Rezolvare>("Data/Files/rezolvari.json");
+            utilizatori = FileHelper.IncarcareDate<Utilizator>("Data/Files/utilizatori.json");
+            teme = FileHelper.IncarcareDate<Tema>("Data/Files/teme.json");
+            rezolvari = FileHelper.IncarcareDate<Rezolvare>("Data/Files/rezolvari.json");
 
             Console.WriteLine("Datele au fost încărcate cu succes!");
         }

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.IO;
 using System.Text.Json;
-namespace WpfApp1.GestionareTeme.Utilities
+namespace ProiectPOO.Utilities
 {
 
     public static class FileHelper
