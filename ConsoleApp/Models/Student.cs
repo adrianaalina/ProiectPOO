@@ -1,6 +1,6 @@
-﻿using ProiectPOO.Models;
+﻿using Models;
 
-namespace ProiectPOO.Models;
+namespace Models;
 
 public class Student: Utilizator
 {

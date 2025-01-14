@@ -1,5 +1,5 @@
 ﻿
-namespace ProiectPOO.Models
+namespace Models
 {
 
     public class Admin : Utilizator

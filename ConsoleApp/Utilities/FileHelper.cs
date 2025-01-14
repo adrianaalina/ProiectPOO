@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.IO;
 using System.Text.Json;
-namespace ProiectPOO.Utilities
+namespace Utilities.FileHelper
 {
 
     public static class FileHelper

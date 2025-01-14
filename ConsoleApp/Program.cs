@@ -1,12 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using ProiectPOO.Aplicatie;
+using Aplicatie;
 
 class Program
 {
     static void Main(string[] args)
     {
-        var aplicatie = new Aplicatie();
+        var aplicatie = new Aplicatie.Aplicatie();
         aplicatie.Start();
+        aplicatie.AfisareMeniuPrincipal();
     }
 }
