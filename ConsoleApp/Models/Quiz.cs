@@ -4,8 +4,8 @@
     public class Quiz: Tema
     { public List<string> Intrebari { get; set; }
 
-        public Quiz(int id, string nume, string cerinta, DateTime dataActivare, DateTime deadline, bool esteObligatorie)
-            : base(id, nume, cerinta, dataActivare, deadline, esteObligatorie)
+        public Quiz(int id, string nume, string cerinta, DateTime dataActivare, DateTime deadline, bool esteObligatorie, bool predarecuintarziere)
+            : base(id, nume, cerinta, dataActivare, deadline, esteObligatorie, predarecuintarziere)
         {
             Intrebari = new List<string>();
         }

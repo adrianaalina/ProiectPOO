@@ -6,23 +6,23 @@
         public int Id { get; set; }
         public int TemaId {get; set;}
         public int StudentId { get; set; }
-        public string Raspuns{ get; set; }
+        public string Continut{ get; set; }
         public List<string> FisiereIncarcate { get; set; }
         public DateTime DataPredare  { get; set; }
         public bool EsteEvaluata { get; set; }
         public int Nota { get; set; }
         public string Comentarii { get; set; }
 
-        public Rezolvare(int id, int temeId, int studentId, string raspuns, List<string> fisiereIncarcate,
-            DateTime dataPredare)
+        public Rezolvare(int id, int temeId, int studentId, string continut, List<string> fisiereIncarcate,
+            bool esteEvaluata,DateTime dataPredare)
         {
             Id = id;
             TemaId = temeId;
             StudentId = studentId;
-            Raspuns = raspuns;
+            Continut = continut;
             FisiereIncarcate = fisiereIncarcate ?? new List<string>();
             DataPredare = dataPredare;
-            EsteEvaluata = false;
+            EsteEvaluata = esteEvaluata;
             Nota = 0;
             Comentarii = string.Empty;
         }
