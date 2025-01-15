@@ -5,6 +5,7 @@
     {
         public int Id { get; set; }
         public int TemaId {get; set;}
+        public string TemaNume {get; set;}
         public int StudentId { get; set; }
         public string Continut{ get; set; }
         public List<string> FisiereIncarcate { get; set; }
@@ -13,11 +14,12 @@
         public int Nota { get; set; }
         public string Comentarii { get; set; }
 
-        public Rezolvare(int id, int temeId, int studentId, string continut, List<string> fisiereIncarcate,
+        public Rezolvare(int id, int temeId,string temaNume, int studentId, string continut, List<string> fisiereIncarcate,
             bool esteEvaluata,DateTime dataPredare)
         {
             Id = id;
             TemaId = temeId;
+            TemaNume = temaNume;
             StudentId = studentId;
             Continut = continut;
             FisiereIncarcate = fisiereIncarcate ?? new List<string>();

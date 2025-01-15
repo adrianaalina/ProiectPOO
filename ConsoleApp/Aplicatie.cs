@@ -12,7 +12,7 @@ using Utilities;
 public class Aplicatie
 {
     private List<Utilizator> utilizatori;
-    private List<Tema> teme;
+    private List<Tema> teme=new List<Tema>();
     private List<Rezolvare> rezolvari;
     private TemaService temaService = new TemaService();
     public Aplicatie()
@@ -20,6 +20,7 @@ public class Aplicatie
         utilizatori = new List<Utilizator>();
         teme = new List<Tema>();
         rezolvari = new List<Rezolvare>();
+        
 
         IncarcaDateInitiale();
     }
@@ -69,8 +70,6 @@ public class Aplicatie
         {
             Console.WriteLine("Bine ai venit la Sistemul de Gestionare a Temelor!");
             AfisareMeniuPrincipal();
-            
-            // Aici vine logica aplicației: autentificare, meniuri, funcționalități
             Console.WriteLine("Apasă orice tastă pentru a iesi...");
             Console.ReadKey();
         }
@@ -80,6 +79,7 @@ public class Aplicatie
         }
     }
 
+    //MeniuPrincipal
     public void AfisareMeniuPrincipal()
     {
         while (true)
@@ -106,6 +106,8 @@ public class Aplicatie
         }
     }
 
+    
+    //Meniu utilizator
     private void AutentificareUtilizator()
     {
         Console.Clear();
@@ -144,6 +146,8 @@ public class Aplicatie
 
     }
 
+    
+    //MeniuStudent
     private void AfisareMeniuStudent(Student student)
     {
         while (true)
@@ -173,7 +177,7 @@ public class Aplicatie
             }
         }
     }
-
+    //Functie Predare Teme
     public void PredaTema(Student student, List<Tema> teme, List<Rezolvare> rezolvari)
     {
         Console.Clear();
@@ -202,7 +206,14 @@ public class Aplicatie
                 Console.ReadKey();
                 return;
             }
-
+            Console.Write("\nIntrodu numele temei pentru care dorești să predai soluția: ");
+            string temanume = Console.ReadLine();
+            if (!string.IsNullOrEmpty(temanume))
+            {
+                Console.WriteLine("ID invalid. Apasă orice tastă pentru a reveni.");
+                Console.ReadKey();
+                return;
+            }
             var temaSelectata = teme.FirstOrDefault(t => t.Id == temaId);
             if (temaSelectata == null)
             {
@@ -220,11 +231,12 @@ public class Aplicatie
                     .ToList();
                 Console.Write("Introdu soluția ta: ");
                 string continut = Console.ReadLine();
-                
+
 
                 var rezolvare = new Rezolvare(
                     id: rezolvari.Count + 1,
                     temeId: temaSelectata.Id,
+                    temaNume: temanume,
                     studentId: student.Id,
                     fisiereIncarcate: fisiereIncarcate,
                     continut: continut,
@@ -242,13 +254,16 @@ public class Aplicatie
             
         }
     }
-
-
+    //Functie Vizzualizare Teme
     private void VizualizeazaTeme()
     {
         temaService.AfiseazaTeme(teme);
     }
+    
+    
+    
 
+    //Meniu Profesor
     private void AfisareMeniuProfesor(Profesor profesor)
     {
         while (true)
@@ -266,13 +281,13 @@ public class Aplicatie
             switch (optiune)
             {
                 case "1":
-                   // CreeazaTema(profesor);
+                   TemaService.CreeazaTema(teme,profesor);
                     break;
                 case "2":
-                   // EvalueazaTeme(profesor);
+                   TemaService.EvalueazaRezolvare(rezolvari);
                     break;
                 case "3":
-                    //VizualizeazaStatistici();
+                    TemaService.ArataStatisticiTeme(teme);
                     break;
                 case "0":
                     return;
@@ -282,7 +297,10 @@ public class Aplicatie
             }
         }  
     }
+    
+  
 
+   
 
     private void AfisareMeniuAdmin(Admin admin)
     {
@@ -301,13 +319,18 @@ public class Aplicatie
             switch (optiune)
             {
                 case "1":
-                    //AdaugaUtilizator();
+                    Console.WriteLine("Introduceti username-ul utilizatorul");
+                    string username = Console.ReadLine();
+                     Admin.InrolareUtilizator(username,utilizatori);
                     break;
                 case "2":
-                    //StergeUtilizator();
+                     Console.WriteLine("Introduceti ID utilizatorul");
+                    utilizatorselectat.Id = int.Parse(Console.ReadLine());
+                    Utilizator utilizatorselectat = utilizatori.Find(u => u.Id.Equals());
+                    Admin.StergereUtilizator(utilizatorselectat.Id);
                     break;
                 case "3":
-                   // VizualizeazaUtilizatori();
+                    VizualizareUtilizatori(utilizatori);
                     break;
                 case "0":
                     return;
@@ -317,7 +340,22 @@ public class Aplicatie
             }
         }
     }
-    
+
+    public void VizualizareUtilizatori(List<Utilizator> utilizatori)
+    {
+        if (utilizatori.Count == 0)
+        {
+            Console.WriteLine("Nu există utilizatori înregistrati.");
+        }
+        else
+        {
+            Console.WriteLine("Lista de utilizatori:");
+            foreach (var utilizator in utilizatori)
+            {
+                Console.WriteLine($"- Nume {utilizator.Nume} ,ID {utilizator.Id} ,Username {utilizator.Username}");
+            }
+        }
+    }
 }
 
 

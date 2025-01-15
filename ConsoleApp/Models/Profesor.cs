@@ -1,5 +1,4 @@
-﻿
-namespace Models
+﻿namespace Models
 {
 
     public class Profesor : Utilizator
@@ -10,7 +9,7 @@ namespace Models
         {
             TemeGestionateIds = new List<int>();
         }
-
+        
         public override void AfisareDetalii()
         {
             base.AfisareDetalii();
