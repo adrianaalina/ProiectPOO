@@ -114,14 +114,8 @@ public class Aplicatie
     public void Start()
     {
         
-        try
-        {
             Console.WriteLine("Bine ai venit la Sistemul de Gestionare a Temelor!");
-        }
-        finally
-        {
-            SalveazaDate();
-        }
+        
     }
 
     //MeniuPrincipal

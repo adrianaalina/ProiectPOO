@@ -2,40 +2,48 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Models;
 namespace Utilities.FileHelper
 {
     public static class FileHelper
     {
-        public static void SalvareDate<T>(string caleFisier, List<T> date)
-        {
-            try
+            public static void SalvareDate<T>(string caleFisier, List<T> date)
             {
                 using (var writer = new StreamWriter(caleFisier))
                 {
                     foreach (var item in date)
                     {
-                        // Vom crea o listă cu valorile pentru fiecare proprietate
-                        List<string> valori = new List<string>();
-
-                        foreach (var prop in typeof(T).GetProperties())
+                        // Verifică dacă obiectul este de tip Utilizator
+                        if (item is Utilizator utilizator)
                         {
-                            var valoare = prop.GetValue(item)?.ToString() ?? "null"; // Preluăm valoarea proprietății
-                            valori.Add(valoare); // Adăugăm valoarea în listă
-                        }
+                            string tipUtilizator = "student"; // Default
 
-                        // Scriem valorile în formatul dorit, separate prin virgulă
-                        writer.WriteLine(string.Join(",", valori));
+                            // Logica de determinare a tipului
+                            if (utilizator.Username.Contains("admin"))
+                            {
+                                tipUtilizator = "admin";  // Pentru utilizatori de tip admin
+                            }
+                            else if (utilizator.Username.Contains("prof"))
+                            {
+                                tipUtilizator = "profesor"; // Pentru utilizatori de tip profesor
+                            }
+                            // "student" rămâne implicit pentru toți ceilalți
+
+                            // Scrie datele utilizatorului, adăugând tipul (fără a modifica clasa Utilizator)
+                            writer.WriteLine($"{utilizator.Id},{utilizator.Nume},{utilizator.Username},{utilizator.Parola},{tipUtilizator}");
+                        }
+                        else
+                        {
+                            // Dacă este alt tip de obiect, salvează într-un mod generic
+                            var properties = typeof(T).GetProperties();
+                            var propList = properties.Select(p => p.GetValue(item)?.ToString() ?? "null").ToList();
+                            writer.WriteLine(string.Join(",", propList)); // Salvează datele separate prin virgulă
+                        }
                     }
                 }
-
-                Console.WriteLine("Datele au fost salvate cu succes!");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Eroare la salvarea datelor: {ex.Message}");
-            }
-        }
 
+        
 
         public static List<T> IncarcareDate<T>(string caleFisier, Func<T> fabricaDeObiecte) where T : class
         {
