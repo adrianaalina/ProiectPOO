@@ -1,18 +1,4 @@
-﻿
-$type: Student
-Id: 1
-Nume: Ion Popescu
-Username: ion
-Parola: parola
-   
-$type: Profesor
-Id: 2
-Nume: Maria Ionescu
-Username: maria
-Parola: parola
-
-$type: Student
-Id: 3
-Nume: Elena Marin
-Username: elena
-Parola: parola
+﻿1,Popescu Ion,ipopescu,password123,profesor
+2,Ionescu Maria,mionescu,parola456,student
+3,David Mihai,mdavid,1234,profesor
+4,Georgescu Ana,ageorgescu,student789,student

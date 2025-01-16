@@ -18,6 +18,7 @@ public class Aplicatie
     private List<Tema> teme=new List<Tema>();
     private List<Rezolvare> rezolvari;
     private TemaService temaService = new TemaService();
+    public List<Profesor> profesori = new List<Profesor>();
     public Aplicatie()
     {
         utilizatori = new List<Utilizator>();
@@ -74,9 +75,6 @@ public class Aplicatie
         try
         {
             Console.WriteLine("Bine ai venit la Sistemul de Gestionare a Temelor!");
-            AfisareMeniuPrincipal();
-            Console.WriteLine("Apasă orice tastă pentru a iesi...");
-            Console.ReadKey();
         }
         finally
         {
@@ -100,6 +98,7 @@ public class Aplicatie
             {
                 case "1": 
                     AutentificareUtilizator();
+                    return;
                     break;
                 case "0":
                     Console.WriteLine("La revedere! (^-^)");
@@ -108,6 +107,7 @@ public class Aplicatie
                     Console.WriteLine("Optiune invalida! :("); //emoticon nou
                     break;
             }
+            return;
         }
     }
 
@@ -115,83 +115,78 @@ public class Aplicatie
     //Meniu utilizator
     private void AutentificareUtilizator()
     {
+        
         Console.Clear();
         Console.WriteLine("|^^^   Autentificare ca utilizator  ^^^|");
         Console.WriteLine();
-        Console.WriteLine("*** Introduceti numele de utilizator *** ");
+        Console.WriteLine("* Introduceti numele de utilizator * ");
         string username = Console.ReadLine();
-        Console.WriteLine("*** Introduceti parola ***");
+        Console.WriteLine("* Introduceti parola *");
         string parola = Console.ReadLine();
+        VerificaTipUtilizator(username, parola);
         
-        var utilizator=utilizatori.FirstOrDefault(u => u.Nume == username && u.Parola == parola);
-        string filePath = "utilizatori.txt";
-        var linii = File.ReadAllLines(filePath);
-        var linieUtilizator = linii.FirstOrDefault(l => l.StartsWith(username + ","));
-            
-            bool autentificat = VerificaLogare(username, parola);
-
-            if (autentificat)
-            {
-                Console.WriteLine("Logare reușită!");
-            }
-            else
-            {
-                Console.WriteLine("Logare eșuată. Verificați username-ul sau parola.");
-            }
-
-        // Functie pentru verificarea logării
-        static bool VerificaLogare(string username, string parola)
+    }
+    public  void VerificaTipUtilizator(string username, string parola)
+    {
+        string fisierUtilizatori = "D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt";
+        if (!File.Exists(fisierUtilizatori))
         {
-            string fisierUtilizatori = "utilizatori.txt";
-
-            if (!File.Exists(fisierUtilizatori))
-            {
                 Console.WriteLine("Fișierul utilizatori.txt nu există.");
-                return false;
-            }
+                return; 
+        }
 
-            // Citire linii din fișier
+        else
+        {
             string[] linii = File.ReadAllLines(fisierUtilizatori);
 
             foreach (string linie in linii)
             {
+                //  linia are formatul: id,nume,username,parola,tip
                 string[] date = linie.Split(',');
 
-                if (date.Length == 5)
+                if (date.Length >= 5) // Verificăm dacă există toate câmpurile necesare
                 {
-                    string usernameFisier = date[3];
-                    string parolaFisier = date[4];
-                    //de egalat tip cu date[0]
+                    int id = int.Parse(date[0]);
+                    string numele = date[1];
+                    string usernameFisier = date[2];
+                    string parolaFisier = date[3];
+                    string tipUtilizator = date[4];
 
                     if (username == usernameFisier && parola == parolaFisier)
                     {
-                        if($"type" is  student)
+                        if (tipUtilizator == "profesor")
                         {
-                            AfisareMeniuStudent(student);   
-                        }
-                        else if (utilizator is Profesor profesor)
-                        {
+                            var profesor = new Profesor(id, numele, usernameFisier, parolaFisier);
                             AfisareMeniuProfesor(profesor);
+                            Console.WriteLine("Conectare ca utilizator.Apasayi orice tasta");
+                            Console.ReadKey();
                         }
-                        else if (utilizator is Admin admin)
+                        else if (tipUtilizator == "student")
+
                         {
-                            AfisareMeniuAdmin(admin);
+                            var student = new Student(id, numele, usernameFisier, parolaFisier);
+                            AfisareMeniuStudent(student);
+                            Console.WriteLine("Conectare ca utilizator.Apasayi orice tasta");
+                            Console.ReadKey();
                         }
                     }
                     else
                     {
-                        Console.WriteLine("Utilizatorul nu a fost gasit. Apasati orice tasta pentru a reveni.");
-                        Console.ReadKey();
-                        return;
+                        Console.WriteLine(("Logare esuata!Verificati username-ul sau parola."));
                     }
+
                 }
+                else Console.WriteLine("Nu exista campurile necesare");
+
+                return;
+            }
         }
 
+        return;
     }
-
-    
+        
     //MeniuStudent
-    private void AfisareMeniuStudent(Student student)
+    private  void AfisareMeniuStudent(Student student)
     {
         while (true)
         {
