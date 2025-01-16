@@ -13,31 +13,26 @@ namespace Utilities.FileHelper
                 {
                     foreach (var item in date)
                     {
-                        // Verifică dacă obiectul este de tip Utilizator
+
                         if (item is Utilizator utilizator)
                         {
-                            string tipUtilizator = "student"; // Default
-
-                            // Logica de determinare a tipului
+                            string tipUtilizator = "student";
                             if (utilizator.Username.Contains("admin"))
                             {
-                                tipUtilizator = "admin";  // Pentru utilizatori de tip admin
+                                tipUtilizator = "admin";
                             }
                             else if (utilizator.Username.Contains("prof"))
                             {
-                                tipUtilizator = "profesor"; // Pentru utilizatori de tip profesor
+                                tipUtilizator = "profesor";
+                                writer.WriteLine(
+                                    $"{utilizator.Id},{utilizator.Nume},{utilizator.Username},{utilizator.Parola},{tipUtilizator}");
                             }
-                            // "student" rămâne implicit pentru toți ceilalți
-
-                            // Scrie datele utilizatorului, adăugând tipul (fără a modifica clasa Utilizator)
-                            writer.WriteLine($"{utilizator.Id},{utilizator.Nume},{utilizator.Username},{utilizator.Parola},{tipUtilizator}");
                         }
                         else
                         {
-                            // Dacă este alt tip de obiect, salvează într-un mod generic
                             var properties = typeof(T).GetProperties();
                             var propList = properties.Select(p => p.GetValue(item)?.ToString() ?? "null").ToList();
-                            writer.WriteLine(string.Join(",", propList)); // Salvează datele separate prin virgulă
+                            writer.WriteLine(string.Join(",", propList)); 
                         }
                     }
                 }

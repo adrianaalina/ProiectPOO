@@ -30,9 +30,9 @@
                         break;
                     }
                     else
-                        {
-                            Console.WriteLine("Timpul trebuie sa fie un numar pozitiv!");
-                        }
+                    {
+                            Console.WriteLine("Timpul trebuie sa fie un numar pozitiv!"); 
+                    }
                 }
                 catch
                 {

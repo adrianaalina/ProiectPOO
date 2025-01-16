@@ -34,48 +34,33 @@ public class Aplicatie
 {
     try
     {
-        // Verificăm dacă lista utilizatori există deja
         if (utilizatori == null)
             utilizatori = new List<Utilizator>();
-
-        // Calea fișierului
         string filePath = "D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt";
-
-        // Citim toate liniile din fișier
         string[] linii = File.ReadAllLines(filePath);
 
         foreach (string linie in linii)
         {
-            // Împărțim linia în câmpuri separate prin virgulă
             string[] date = linie.Split(',');
 
-            if (date.Length >= 5) // Verificăm dacă există toate câmpurile
+            if (date.Length >= 5) 
             {
-                // Extragem câmpurile
                 int id = int.Parse(date[0]);
                 string nume = date[1];
                 string username = date[2];
                 string parola = date[3];
-                string tipUtilizator = date[4];  // Tipul de utilizator din fișier
+                string tipUtilizator = date[4];  
 
-                // Creăm obiectul Utilizator
                 var utilizator = new Utilizator(id, nume, username, parola);
-
-                // Păstrăm tipul de utilizator într-o variabilă separată pentru utilizări ulterioare
-                // De exemplu, îl poți folosi pentru a decide ce meniu să afișezi
                 Console.WriteLine($"Utilizator încărcat: {utilizator.Nume}, Tip: {tipUtilizator}");
-
-                // Poți adăuga un cod pentru a procesa utilizatorii în funcție de tipul lor
                 if (tipUtilizator == "profesor")
                 {
-                    // Cod pentru profesori
+                    Console.WriteLine("Datele pentru profesor au fost incarcate!");
                 }
                 else if (tipUtilizator == "student")
                 {
-                    // Cod pentru studenți
+                    Console.WriteLine("Datele pentru student au fost incarcate!");
                 }
-
-                // Adăugăm utilizatorul în listă
                 utilizatori.Add(utilizator);
             }
             else
@@ -127,7 +112,7 @@ public class Aplicatie
             Console.WriteLine("***  Aplicatia de gestionare a temelor  ***");
             Console.WriteLine("Pentru autentificare tastati '1', iar pentru iesire '0'");
             Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine("(◔_◔)?");  // de verificat cum se foloseste UTF-8
+            Console.WriteLine("(◔_◔)?"); 
             string optiune = Console.ReadLine();
 
             switch (optiune)
@@ -140,7 +125,7 @@ public class Aplicatie
                     Console.WriteLine("La revedere! (^-^)");
                     return;
                 default:
-                    Console.WriteLine("Optiune invalida! :("); //emoticon nou
+                    Console.WriteLine("Optiune invalida! :("); 
                     break;
             }
             return;
@@ -244,7 +229,7 @@ public class Aplicatie
                    StudentService.PredaTema(student,teme,rezolvari);
                     break;
                 case "3":
-                    StudentService.AfiseazaNote(teme,student.Nume); // Apelul funcției
+                    StudentService.AfiseazaNote(teme,student.Nume); 
                     break;
                 case "0":
                     return;

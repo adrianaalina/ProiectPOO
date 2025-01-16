@@ -1,4 +1,4 @@
 1,Popescu Ion,ipopescu,password123,profesor
-2,Ionescu Maria,mionescu,parola456,student
+2,Ionescu Maria,mionescu,parola456,admin
 3,David Mihai,mdavid,1234,profesor
 4,Georgescu Ana,ageorgescu,student789,student
