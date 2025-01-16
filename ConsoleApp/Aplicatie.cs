@@ -36,9 +36,9 @@ public class Aplicatie
         {
             DateTime dataInitiala = new DateTime(2015, 12, 23);
             List<string> fisiere = new List<string>();
-            var utilizatori = Utilities.FileHelper.FileHelper.IncarcareDate<Utilizator>("utilizatori.txt",()=>new Utilizator(0, "", "", "") );
-           var teme = Utilities.FileHelper.FileHelper.IncarcareDate<Tema>("teme.txt", () => new Tema(0,"","",dataInitiala,dataInitiala,false,true,StatutTema.Nepredat));
-            rezolvari = Utilities.FileHelper.FileHelper.IncarcareDate<Rezolvare>("rezolvari.txt", () => new Rezolvare(0,0,"",0,"",fisiere,false,dataInitiala));
+            var utilizatori = Utilities.FileHelper.FileHelper.IncarcareDate<Utilizator>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt",()=>new Utilizator(0, "", "", "") );
+           var teme = Utilities.FileHelper.FileHelper.IncarcareDate<Tema>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\teme.txt", () => new Tema(0,"","",dataInitiala,dataInitiala,false,true,StatutTema.Nepredat));
+            rezolvari = Utilities.FileHelper.FileHelper.IncarcareDate<Rezolvare>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\rezolvari.txt", () => new Rezolvare(0,0,"",0,"",fisiere,false,dataInitiala));
 
             Console.WriteLine("Datele au fost incarcate cu succes!");
         }
@@ -55,9 +55,9 @@ public class Aplicatie
     {
         try
         { 
-            Utilities.FileHelper.FileHelper.SalvareDate("Data/Files/utilizatori.json", utilizatori);
-            Utilities.FileHelper.FileHelper.SalvareDate("Data/Files/teme.json", teme);
-            Utilities.FileHelper.FileHelper.SalvareDate("Data/Files/rezolvari.json", rezolvari);
+            Utilities.FileHelper.FileHelper.SalvareDate("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt", utilizatori);
+            Utilities.FileHelper.FileHelper.SalvareDate("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\teme.txt", teme);
+            Utilities.FileHelper.FileHelper.SalvareDate("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\rezolvari.txt", rezolvari);
 
             Console.WriteLine("Datele au fost salvate cu succes!");
         }
