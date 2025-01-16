@@ -1,8 +1,4 @@
-﻿Id: 1
-TemaId: 1
-StudentId: 1
-Continut: Soluție detaliată.
-DataPredare: 2023-12-10
-EsteEvaluata: true
-Nota: 9
-Comentarii: Foarte bine!
+﻿1,1,1,Soluție detaliată.,2023-12-10,true,9,Foarte bine!
+2,1,2,Soluție incompletă.,2023-12-12,false,,Necesită îmbunătățiri.
+3,2,3,Rezolvare excelentă.,2024-01-05,true,10,Superb!
+4,3,4,Lipsesc detalii importante.,2024-01-07,true,7,Recomand clarificarea unor aspecte.
