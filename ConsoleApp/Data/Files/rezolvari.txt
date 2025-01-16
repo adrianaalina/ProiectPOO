@@ -1,0 +1,8 @@
+﻿Id: 1
+TemaId: 1
+StudentId: 1
+Continut: Soluție detaliată.
+DataPredare: 2023-12-10
+EsteEvaluata: true
+Nota: 9
+Comentarii: Foarte bine!

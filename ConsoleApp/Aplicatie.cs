@@ -1,7 +1,9 @@
 ﻿using System.Buffers.Text;
+using System.Data;
 using System.Text;
 using System.Text.Unicode;
 using ConsoleApp.Services;
+using System.Collections.Generic;
 
 
 namespace Aplicatie;
@@ -31,9 +33,11 @@ public class Aplicatie
     {
         try
         {
-           utilizatori = Utilities.FileHelper.FileHelper.IncarcareDate<Utilizator>("Data/Files/utilizatori.json" );
-            teme = Utilities.FileHelper.FileHelper.IncarcareDate<Tema>("Data/Files/teme.json");
-            rezolvari = Utilities.FileHelper.FileHelper.IncarcareDate<Rezolvare>("Data/Files/rezolvari.json");
+            DateTime dataInitiala = new DateTime(2015, 12, 23);
+            List<string> fisiere = new List<string>();
+            var utilizatori = Utilities.FileHelper.FileHelper.IncarcareDate<Utilizator>("utilizatori.txt",()=>new Utilizator(0, "", "", "") );
+           var teme = Utilities.FileHelper.FileHelper.IncarcareDate<Tema>("teme.txt", () => new Tema(0,"","",dataInitiala,dataInitiala,false,true,StatutTema.Nepredat));
+            rezolvari = Utilities.FileHelper.FileHelper.IncarcareDate<Rezolvare>("rezolvari.txt", () => new Rezolvare(0,0,"",0,"",fisiere,false,dataInitiala));
 
             Console.WriteLine("Datele au fost incarcate cu succes!");
         }
@@ -120,29 +124,67 @@ public class Aplicatie
         string parola = Console.ReadLine();
         
         var utilizator=utilizatori.FirstOrDefault(u => u.Nume == username && u.Parola == parola);
+        string filePath = "utilizatori.txt";
+        var linii = File.ReadAllLines(filePath);
+        var linieUtilizator = linii.FirstOrDefault(l => l.StartsWith(username + ","));
+            
+            bool autentificat = VerificaLogare(username, parola);
 
-        if (utilizator == null)
+            if (autentificat)
+            {
+                Console.WriteLine("Logare reușită!");
+            }
+            else
+            {
+                Console.WriteLine("Logare eșuată. Verificați username-ul sau parola.");
+            }
+
+        // Functie pentru verificarea logării
+        static bool VerificaLogare(string username, string parola)
         {
-            Console.WriteLine("Utilizatorul nu a fost gasi! :("); // de cautat emoticoane noi
-            Console.WriteLine("Apasa o tasta prntru a reveni la meniu"); 
-            Console.ReadKey();
-            return;
-        }
-        else
-        {
-            Console.WriteLine($"Bine ai venit, {utilizator.Nume}");
-            if(utilizator is Student student)
+            string fisierUtilizatori = "utilizatori.txt";
+
+            if (!File.Exists(fisierUtilizatori))
             {
-             AfisareMeniuStudent(student);   
+                Console.WriteLine("Fișierul utilizatori.txt nu există.");
+                return false;
             }
-            else if (utilizator is Profesor profesor)
+
+            // Citire linii din fișier
+            string[] linii = File.ReadAllLines(fisierUtilizatori);
+
+            foreach (string linie in linii)
             {
-                AfisareMeniuProfesor(profesor);
-            }
-            else if (utilizator is Admin admin)
-            {
-                AfisareMeniuAdmin(admin);
-            }
+                string[] date = linie.Split(',');
+
+                if (date.Length == 5)
+                {
+                    string usernameFisier = date[3];
+                    string parolaFisier = date[4];
+                    //de egalat tip cu date[0]
+
+                    if (username == usernameFisier && parola == parolaFisier)
+                    {
+                        if($"type" is  student)
+                        {
+                            AfisareMeniuStudent(student);   
+                        }
+                        else if (utilizator is Profesor profesor)
+                        {
+                            AfisareMeniuProfesor(profesor);
+                        }
+                        else if (utilizator is Admin admin)
+                        {
+                            AfisareMeniuAdmin(admin);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Utilizatorul nu a fost gasit. Apasati orice tasta pentru a reveni.");
+                        Console.ReadKey();
+                        return;
+                    }
+                }
         }
 
     }

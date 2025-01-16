@@ -1,0 +1,6 @@
+﻿Id: 1
+Nume: Tema 1
+Cerinta: Realizează un proiect.
+DataActivare: 2023-12-01
+Deadline: 2024-01-01
+EsteObligatorie: true
