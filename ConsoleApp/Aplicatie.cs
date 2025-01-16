@@ -12,6 +12,7 @@ using Utilities;
 public class Aplicatie
 {
     private List<Utilizator> utilizatori;
+    private List<Student> studenti;
     private List<Tema> teme=new List<Tema>();
     private List<Rezolvare> rezolvari;
     private TemaService temaService = new TemaService();
@@ -208,6 +209,10 @@ public class Aplicatie
                     break;
                 case "3":
                     TemaService.ArataStatisticiTeme(teme);
+                    break;
+                case "4":
+                    var FormulaMedie = TemaService.FormulaMedie();
+                    TemaService.CalculeazaMedii(rezolvari,studenti, FormulaMedie); 
                     break;
                 case "0":
                     return;

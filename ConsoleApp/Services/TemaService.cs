@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Data;
 
 namespace ConsoleApp.Services
 {
@@ -88,12 +89,14 @@ namespace ConsoleApp.Services
             permitePredareIntarziata: predataintarziere,
             statut:statut
         );
+        
         teme.Add(tema);
         Console.WriteLine("Tema a fost creata!");
         Console.WriteLine("Apasă orice tastă pentru a reveni la meniu.");
         Console.ReadKey();
         
     }
+         
 
     public static void EvalueazaRezolvare(List<Rezolvare> rezolvari)
     {
@@ -146,7 +149,70 @@ namespace ConsoleApp.Services
             Console.WriteLine($"{statistica.Statut}: {statistica.Count} teme");
         }
     }
-    
+
+
+    public static void CalculeazaMedii(List<Rezolvare> rezolvari, List<Student> studenti,
+        Func<List<int>, double> formula)
+    {
+        Console.Clear();
+        Console.WriteLine("|*** Calcul medii  ***|");
+        foreach (var student in studenti)
+        {
+            var noteleStudentului = rezolvari
+                .Where(r => r.StudentId == student.Id && r.EsteEvaluata)
+                .Select(r => r.Nota)
+                .ToList();
+
+            if (!noteleStudentului.Any())
+            {
+                Console.WriteLine($"Student: {student.Nume} nu are note evaluate.");
+                continue;
+            }
+            double media = formula(noteleStudentului);
+            Console.WriteLine($"Student: {student.Nume}, Media: {media:F2}");
+        }
+        
+        Console.WriteLine("\nApasă orice tastă pentru a reveni.");
+        Console.ReadKey();   
+    }
+    public static Func<List<int>, double> FormulaMedie()
+    {
+        Console.WriteLine("Exemplu de formulă: 0.4 * x1 + 0.6 * x2");
+        Console.WriteLine("Folosiți x1, x2, ... pentru a reprezenta notele în ordine.");
+        Console.WriteLine("Introduceti formula de caalcul pentru medie:");
+        string formula = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(formula))
+        {
+            Console.WriteLine("Formula nu poate fi goală. Apasă orice tastă pentru a reveni.");
+            Console.ReadKey();
+            return null;
+        }
+
+        return (List<int> note) =>
+        {
+            if (note == null || note.Count == 0)
+                return 0;
+            string evaluareFormula = formula;
+            for (int i = 0; i < note.Count; i++)
+            {
+                evaluareFormula = evaluareFormula.Replace($"x{i + 1}", note[i].ToString());
+            }
+
+            try
+            {
+                var dataTable = new DataTable();
+                var rezultat = dataTable.Compute(evaluareFormula, null);
+                return Convert.ToDouble(rezultat);
+            }
+            catch
+            {
+                Console.WriteLine("Eroare în interpretarea formulei. Verificați sintaxa.");
+                return 0;
+            }
+
+        };
+    }
+
 }
 }
 

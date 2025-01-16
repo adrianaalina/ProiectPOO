@@ -124,5 +124,10 @@ namespace ConsoleApp.Services
             Console.ReadKey();
             
         }
+
+        public static void AfisareMedii()
+        {
+            
+        }
     }
 }
