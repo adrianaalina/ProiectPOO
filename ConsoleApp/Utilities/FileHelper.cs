@@ -8,22 +8,34 @@ namespace Utilities.FileHelper
     {
         public static void SalvareDate<T>(string caleFisier, List<T> date)
         {
-            using (var writer = new StreamWriter(caleFisier))
+            try
             {
-                foreach (var item in date)
+                using (var writer = new StreamWriter(caleFisier))
                 {
-                    
-                    foreach (var prop in typeof(T).GetProperties())
+                    foreach (var item in date)
                     {
-                        var valoare = prop.GetValue(item)?.ToString() ?? "null";
-                        writer.WriteLine($"{prop.Name}: {valoare}");
-                    }
-                    
-                    writer.WriteLine();
-                }
-            }
+                        // Vom crea o listă cu valorile pentru fiecare proprietate
+                        List<string> valori = new List<string>();
 
+                        foreach (var prop in typeof(T).GetProperties())
+                        {
+                            var valoare = prop.GetValue(item)?.ToString() ?? "null"; // Preluăm valoarea proprietății
+                            valori.Add(valoare); // Adăugăm valoarea în listă
+                        }
+
+                        // Scriem valorile în formatul dorit, separate prin virgulă
+                        writer.WriteLine(string.Join(",", valori));
+                    }
+                }
+
+                Console.WriteLine("Datele au fost salvate cu succes!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Eroare la salvarea datelor: {ex.Message}");
+            }
         }
+
 
         public static List<T> IncarcareDate<T>(string caleFisier, Func<T> fabricaDeObiecte) where T : class
         {

@@ -30,26 +30,68 @@ public class Aplicatie
     }
 
 
-    private void IncarcaDateInitiale()
+   private void IncarcaDateInitiale()
+{
+    try
     {
-        try
-        {
-            DateTime dataInitiala = new DateTime(2015, 12, 23);
-            List<string> fisiere = new List<string>();
-            var utilizatori = Utilities.FileHelper.FileHelper.IncarcareDate<Utilizator>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt",()=>new Utilizator(0, "", "", "") );
-           var teme = Utilities.FileHelper.FileHelper.IncarcareDate<Tema>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\teme.txt", () => new Tema(0,"","",dataInitiala,dataInitiala,false,true,StatutTema.Nepredat));
-            rezolvari = Utilities.FileHelper.FileHelper.IncarcareDate<Rezolvare>("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\rezolvari.txt", () => new Rezolvare(0,0,"",0,"",fisiere,false,dataInitiala));
-
-            Console.WriteLine("Datele au fost incarcate cu succes!");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Eroare la incarcarea datelor: {ex.Message}");
+        // Verificăm dacă lista utilizatori există deja
+        if (utilizatori == null)
             utilizatori = new List<Utilizator>();
-            teme = new List<Tema>();
-            rezolvari = new List<Rezolvare>();
+
+        // Calea fișierului
+        string filePath = "D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\utilizatori.txt";
+
+        // Citim toate liniile din fișier
+        string[] linii = File.ReadAllLines(filePath);
+
+        foreach (string linie in linii)
+        {
+            // Împărțim linia în câmpuri separate prin virgulă
+            string[] date = linie.Split(',');
+
+            if (date.Length >= 5) // Verificăm dacă există toate câmpurile
+            {
+                // Extragem câmpurile
+                int id = int.Parse(date[0]);
+                string nume = date[1];
+                string username = date[2];
+                string parola = date[3];
+                string tipUtilizator = date[4];  // Tipul de utilizator din fișier
+
+                // Creăm obiectul Utilizator
+                var utilizator = new Utilizator(id, nume, username, parola);
+
+                // Păstrăm tipul de utilizator într-o variabilă separată pentru utilizări ulterioare
+                // De exemplu, îl poți folosi pentru a decide ce meniu să afișezi
+                Console.WriteLine($"Utilizator încărcat: {utilizator.Nume}, Tip: {tipUtilizator}");
+
+                // Poți adăuga un cod pentru a procesa utilizatorii în funcție de tipul lor
+                if (tipUtilizator == "profesor")
+                {
+                    // Cod pentru profesori
+                }
+                else if (tipUtilizator == "student")
+                {
+                    // Cod pentru studenți
+                }
+
+                // Adăugăm utilizatorul în listă
+                utilizatori.Add(utilizator);
+            }
+            else
+            {
+                Console.WriteLine($"Linia este invalidă: {linie}");
+            }
         }
+
+        Console.WriteLine("Utilizatorii au fost încărcați cu succes!");
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Eroare la încărcarea utilizatorilor: {ex.Message}");
+    }
+}
+
 
     private void SalveazaDate()
     {
@@ -140,11 +182,10 @@ public class Aplicatie
             string[] linii = File.ReadAllLines(fisierUtilizatori);
 
             foreach (string linie in linii)
-            {
-                //  linia are formatul: id,nume,username,parola,tip
+            { 
                 string[] date = linie.Split(',');
 
-                if (date.Length >= 5) // Verificăm dacă există toate câmpurile necesare
+                if (date.Length >= 5) 
                 {
                     int id = int.Parse(date[0]);
                     string numele = date[1];

@@ -11,7 +11,7 @@
         public List<string> FisiereIncarcate { get; set; }
         public DateTime DataPredare  { get; set; }
         public bool EsteEvaluata { get; set; }
-        public int Nota { get; set; }
+        public double Nota { get; set; }
         public string Comentarii { get; set; }
 
         public Rezolvare(int id, int temeId,string temaNume, int studentId, string continut, List<string> fisiereIncarcate,

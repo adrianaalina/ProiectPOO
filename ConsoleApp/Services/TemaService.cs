@@ -97,7 +97,6 @@ namespace ConsoleApp.Services
         
     }
          
-
     public static void EvalueazaRezolvare(List<Rezolvare> rezolvari)
     {
         double nota;
@@ -115,16 +114,30 @@ namespace ConsoleApp.Services
         {
             Console.WriteLine($"Rezolvarea selectată: Tema: {rezolvareSelectata.TemaNume}, Student ID: {rezolvareSelectata.StudentId}");
             Console.WriteLine($"Răspuns: {rezolvareSelectata.Continut}");
+        
+            // Se cere nota de la utilizator
             Console.Write("Introduceți nota: ");
-            double.TryParse(Console.ReadLine(),out nota);
+            while (!double.TryParse(Console.ReadLine(), out nota) || nota < 0 || nota > 10) // Validare pentru nota
+            {
+                Console.Write("Nota nu este validă. Introduceți o valoare între 0 și 10: ");
+            }
+
+            // Atribuim nota rezolvării selectate
+            rezolvareSelectata.Nota = nota;
+
+            // Se afișează nota acordată
             Console.WriteLine($"Nota acordată: {rezolvareSelectata.Nota}");
+
+            // Opțional: actualizarea fișierului cu nota
+            // Salvează datele actualizate în fișierul de rezolvări (dacă vrei)
+            Utilities.FileHelper.FileHelper.SalvareDate("D:\\Facultate\\ProiectPOO\\ConsoleApp\\Data\\Files\\rezolvari.txt", rezolvari);
         }
         else
         {
             Console.WriteLine("Rezolvarea cu acest ID nu a fost găsită.");
         } 
-      
     }
+
     
     public static void ArataStatisticiTeme(List<Tema> teme)
     {
@@ -152,7 +165,7 @@ namespace ConsoleApp.Services
 
 
     public static void CalculeazaMedii(List<Rezolvare> rezolvari, List<Student> studenti,
-        Func<List<int>, double> formula)
+        Func<List<double>, double> formula)
     {
         Console.Clear();
         Console.WriteLine("|*** Calcul medii  ***|");
@@ -175,7 +188,7 @@ namespace ConsoleApp.Services
         Console.WriteLine("\nApasă orice tastă pentru a reveni.");
         Console.ReadKey();   
     }
-    public static Func<List<int>, double> FormulaMedie()
+    public static Func<List<double>, double> FormulaMedie()
     {
         Console.WriteLine("Exemplu de formulă: 0.4 * x1 + 0.6 * x2");
         Console.WriteLine("Folosiți x1, x2, ... pentru a reprezenta notele în ordine.");
@@ -188,7 +201,7 @@ namespace ConsoleApp.Services
             return null;
         }
 
-        return (List<int> note) =>
+        return (List<double> note) =>
         {
             if (note == null || note.Count == 0)
                 return 0;
