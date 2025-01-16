@@ -10,4 +10,5 @@ class Program
         aplicatie.Start();
         aplicatie.AfisareMeniuPrincipal();
     }
+    
 }
