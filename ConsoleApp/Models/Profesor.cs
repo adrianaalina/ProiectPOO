@@ -15,5 +15,9 @@
             base.AfisareDetalii();
             Console.WriteLine($"Numar de teme gestionate: {TemeGestionateIds.Count}");
         }
+        
+
+         
+
     }
 }

@@ -233,11 +233,29 @@ public class Aplicatie
             Console.WriteLine("1. Adaugă utilizator");
             Console.WriteLine("2. Șterge utilizator");
             Console.WriteLine("3. Vizualizează utilizatori");
+            Console.WriteLine("4. Creeaza tema");
+            Console.WriteLine("5. Vizualizeaza statistici");
+            Console.WriteLine("6. Evalueaza teme");
+            Console.WriteLine("7. Vizualizeaza teme");
+            Console.WriteLine("8. Preda teme");
+            Console.WriteLine("9. Vizualizeaza note");
             Console.WriteLine("0. Revenire la meniul principal");
             Console.Write("Alege o opțiune: ");
 
             string optiune = Console.ReadLine();
-
+            int idNewP = 0;
+            string numeNewP = "";
+            string materialeNewP = "";
+            string parolaNewP = "";
+            
+            int idNewS = 0;
+            string numeNewS = "";
+            string materialeNewS = "";
+            string parolaNewS = "";
+            
+            Profesor profesorNew=new Profesor(idNewP,numeNewP,materialeNewP,parolaNewP);
+            Student studentNew=new Student(idNewS,numeNewS,materialeNewS,parolaNewS);
+            
             switch (optiune)
             {
                 case "1":
@@ -261,6 +279,24 @@ public class Aplicatie
                     break;
                 case "3":
                     VizualizareUtilizatori(utilizatori);
+                    break;
+                case "4":
+                    TemaService.CreeazaTema(teme,profesorNew);
+                    break;
+                case "5":
+                    TemaService.ArataStatisticiTeme(teme);
+                    break;
+                case "6":
+                    TemaService.EvalueazaRezolvare(rezolvari);
+                    break;
+                case "7":
+                    StudentService.AfiseazaTeme(teme);
+                    break;
+                case "8": 
+                    StudentService.PredaTema(studentNew,teme,rezolvari);
+                    break;
+                case "9":   
+                    StudentService.AfiseazaNote(teme,studentNew.Nume);
                     break;
                 case "0":
                     return;
