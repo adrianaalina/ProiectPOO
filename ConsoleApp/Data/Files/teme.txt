@@ -1,4 +1,4 @@
-﻿1,Tema 1,Realizează un proiect.,2023-12-01,2024-01-01,true
+1,Tema 1,Realizează un proiect.,2023-12-01,2024-01-01,true
 2,Tema 2,Scrie un eseu despre inteligența artificială.,2023-12-15,2024-01-10,false
 3,Tema 3,Elaborează un raport despre siguranța datelor.,2024-01-01,2024-02-01,true
 4,Tema 4,Rezolvă exercițiile din capitolul 5.,2024-01-10,2024-01-31,false
