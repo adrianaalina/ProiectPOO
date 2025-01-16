@@ -98,5 +98,31 @@ namespace ConsoleApp.Services
                 }
             }
         }
+
+        public static void AfiseazaNote(List<Tema> teme, string student)
+        {
+            Console.Clear();
+            Console.WriteLine("|***  Note ***|");
+            var temestudent = teme
+                .Where(t => t.Student== student && t.Nota!=0)
+                .ToList();
+            if (!temestudent.Any())
+            {
+                Console.WriteLine("Nu există note înregistrate pentru acest student.");
+                Console.WriteLine("Apasă orice tastă pentru a reveni.");
+                Console.ReadKey();
+                return;
+            }
+            else
+            {
+                foreach (var tema in temestudent)
+                {
+                    Console.WriteLine($"Tema ID: {tema.Id}, Nota: {tema.Nota}");
+                }
+            }
+            Console.WriteLine("\nApasă orice tastă pentru a reveni.");
+            Console.ReadKey();
+            
+        }
     }
 }

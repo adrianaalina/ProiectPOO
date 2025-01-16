@@ -156,6 +156,7 @@ public class Aplicatie
             Console.WriteLine($"=== Meniu Student: {student.Nume} ===");
             Console.WriteLine("1. Vizualizează teme");
             Console.WriteLine("2. Predă temă");
+            Console.WriteLine("3. Vizualizează note");
             Console.WriteLine("0. Revenire la meniul principal");
             Console.Write("Alege o opțiune: ");
 
@@ -168,6 +169,9 @@ public class Aplicatie
                     break;
                 case "2":
                    StudentService.PredaTema(student,teme,rezolvari);
+                    break;
+                case "3":
+                    StudentService.AfiseazaNote(teme,student.Nume); // Apelul funcției
                     break;
                 case "0":
                     return;
